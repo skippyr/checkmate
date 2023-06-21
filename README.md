@@ -8,7 +8,7 @@ Here is a preview that you can check out.
 
 ![](./images/preview.png)
 
-In the preview, the Checkmate theme was used in the [Kitty terminal](https://github.com/kovidgoyal/kitty) with the [Rosé Pine theme](https://github.com/rose-pine/kitty). Font used was [IntelOne Mono (Medium)](https://github.com/intel/intel-one-mono) with fallback to Nerd Font Symbols.
+In the preview, the Checkmate theme was used in the [Kitty terminal](https://github.com/kovidgoyal/kitty) with the [Flamerial theme](https://github.com/skippyr/flamerial). Font used was Mononoki Nerd Font. The wallpaper used is [this one](https://unsplash.com/photos/aeXK1IeVVoI).
 
 The colors used in the theme may vary in your setup, as it depends on the terminal emulator's theme you are using.
 
