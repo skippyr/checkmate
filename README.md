@@ -2,7 +2,7 @@
 
 ## Starting Point
 
-The Checkmate project is a one-line ZSH theme that uses chess pieces as
+The Checkmate project is an one-line ZSH theme that uses chess pieces as
 decoration.
 
 This theme can be setup with a series of terminal emulators, themes and
@@ -46,7 +46,7 @@ You can install this theme in multiple ways, use the one that suits you best.
 ### Manually
 
 * Run the following command to install the theme at
-  `~/.local/share/zsh/themes/chinatown`.
+  `~/.local/share/zsh/themes/checkmate`.
 
     ```bash
     git clone --depth=1 https://github.com/skippyr/checkmate ~/.local/share/zsh/themes/checkmate &&
