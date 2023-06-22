@@ -33,11 +33,12 @@ function _checkmate::print_git_changes {
   echo "*"
 }
 
-# If inside a Git repository, it prints name of the branch.
-function _checkmate::print_git_branch {
+# If inside a Git repository, it prints the name of the branch and if there are
+# changes to be commited.
+function _checkmate::print_git_info {
   typeset -r branch=$(git branch --show-current 2>/dev/null)
   [[ -n ${branch} ]] &&
   echo " %F{yellow}git:(%F{red}${branch}$(_checkmate::print_git_changes)%F{yellow})%f"
 }
 
-PROMPT='%F{blue}%f %(?..[%F{red}%?%f] )%(#.%F{red}.) $(_checkmate::print_venv)%F{blue}$(_checkmate::print_pwd)%f$(_checkmate::print_git_branch) ↪  '
+PROMPT='%F{blue}%f %(?..[%F{red}%?%f] )%(#.%F{red}.) $(_checkmate::print_venv)%F{blue}$(_checkmate::print_pwd)%f$(_checkmate::print_git_info) ↪  '
