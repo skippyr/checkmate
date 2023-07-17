@@ -14,7 +14,7 @@ A theme for the ZSH shell that its decorated by chess symbols.
 
 Here is the description of its design:
 -	A decorator will tell your user privileges: it will be a pawn if you are a
-	normal user and a queen, `root`.
+	normal user and a queen, if you are `root`.
 -	If your last command failed, its exit code will appear inside parenthesis. For
 	example: `[130]`.
 -	Virtual environments that you have sourced will appear inside angle brackets.
