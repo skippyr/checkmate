@@ -1,51 +1,35 @@
-# Enables ZSH prompt substitution.
-#
-# This make it substitute variables and functions in the prompt variables, but
-# they need to be defined using single quotes for it to work.
 setopt promptsubst
-# Prevents the default changes made to the prompt when sourcing a virtual
-# environment.
-export VIRTUAL_ENV_DISABLE_PROMPT="1"
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# To avoid conflicts with possible user defined functions, all functions defined
-# in this theme use the "checkmate::" prefix.
-#
-# They might also use an underline character (_) at their start to make them
-# harder to find when using a regular tab completition.
+__Checkmate()
+{
+	Get_Virtual_Environment()
+	{
+		[[ -n ${VIRTUAL_ENV} ]] && echo "%f<%F{1}${VIRTUAL_ENV##*/}%f> "
+	}
 
-# If using a virtual environment, prints its base name.
-function _checkmate::print_venv {
-  typeset -r venv=${VIRTUAL_ENV##*/}
-  [[ -n ${venv} ]] &&
-  echo "<%F{magenta}${venv}%f> "
+	Get_Directory()
+	{
+		typeset -a d=("${(s./.)PWD/${HOME}/~}")
+		[[ ${#d} > 1 ]] && for i in {1..$((${#d} - 1))}; do
+			[[ "${d[i]}" == .* ]] && d[i]=${d[i][1,2]} || d[i]=${d[i][1]}
+		done
+		echo ${(j./.)d}
+	}
+
+	Get_Changes()
+	{
+		[[ -n $(git status --porcelain 2>/dev/null) ]] && echo "*"
+	}
+
+	Get_Branch()
+	{
+		typeset -r b=$(git branch --show-current 2>/dev/null)
+		[[ -n $b ]] && echo " %F{3}git:(%F{1}$b$(Get_Changes)%F{3})"
+	}
+
+	echo "%F{4} %(?..%f[%F{1}%?%f] )%(#.%F{1}.)"\
+	     "$(Get_Virtual_Environment)%F{4}$(Get_Directory)$(Get_Branch) %f↪ "
 }
 
-# Prints the current directory path (PWD) with the name of parent directories
-# abbreviated. A tilde character (~) substitutes the ${HOME} directory.
-function _checkmate::print_pwd_abbreviated {
-  typeset -a pwd=("${(s./.)PWD/${HOME}/~}")
-  [[ ${#pwd} > 1 ]] &&
-  for splits_iterator in {1..$((${#pwd} - 1))}; do
-    [[ "${pwd[splits_iterator]}" == .* ]] &&
-    pwd[splits_iterator]="${pwd[splits_iterator][1,2]}" ||
-    pwd[splits_iterator]="${pwd[splits_iterator][1]}"
-  done
-  echo "${(j./.)pwd}"
-}
-
-# If inside a Git repository, prints a decorator if there are changes to be
-# commited.
-function _checkmate::print_git_changes {
-  [[ $(git status --porcelain 2>/dev/null) ]] &&
-  echo "*"
-}
-
-# If inside a Git repository, prints the name of the branch and if there are
-# changes to be commited.
-function _checkmate::print_git_info {
-  typeset -r branch=$(git branch --show-current 2>/dev/null)
-  [[ -n ${branch} ]] &&
-  echo " %F{yellow}git:(%F{red}${branch}$(_checkmate::print_git_changes)%F{yellow})%f"
-}
-
-PROMPT='%F{blue}%f %(?..[%F{red}%?%f] )%(#.%F{red}.) $(_checkmate::print_venv)%F{blue}$(_checkmate::print_pwd_abbreviated)%f$(_checkmate::print_git_info) ↪  '
+PROMPT='$(__Checkmate)'
