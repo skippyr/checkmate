@@ -28,7 +28,7 @@ __Checkmate()
 		[[ -n $b ]] && echo " %F{3}git:(%F{1}$b$(Get_Changes)%F{3})"
 	}
 
-	echo "%F{4} %(?..%f[%F{1}%?%f] )%(#.%F{1}.)"\
+	echo "%F{4} %f%(?..[%F{1}%?%f] )%(#.%F{1}.)"\
 	     "$(Get_Virtual_Environment)%F{4}$(Get_Directory)$(Get_Branch) %f↪ "
 }
 
