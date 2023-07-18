@@ -73,7 +73,7 @@ ZSH_THEME=checkmate/checkmate
 
 ## Support
 
-Report issues, questions and suggestion through the [issues tab](https://github.com/skippyr/checkmate).
+Report issues, questions and suggestion through the [issues tab](https://github.com/skippyr/checkmate/issues).
 
 ## Copyright
 
