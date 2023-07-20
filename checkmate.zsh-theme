@@ -1,7 +1,7 @@
 setopt promptsubst
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-__Checkmate()
+__checkmate_t()
 {
 	Get_Virtual_Environment()
 	{
@@ -32,4 +32,4 @@ __Checkmate()
 	     "$(Get_Virtual_Environment)%F{4}$(Get_Directory)$(Get_Branch) %f↪ "
 }
 
-PROMPT='$(__Checkmate)'
+PROMPT='$(__checkmate_t)'
