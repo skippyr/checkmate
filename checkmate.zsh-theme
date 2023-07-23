@@ -1,8 +1,9 @@
 setopt promptsubst
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 __Checkmate() {
     Get_Virtual_Environment() {
-        [[ ${VIRTUAL_ENV} ]] && echo "%f<%F{1}${VIRTUAL_ENV##*/}%f>"
+        [[ ${VIRTUAL_ENV} ]] && echo "%f<%F{1}${VIRTUAL_ENV##*/}%f> "
     }
 
     Get_Directory() {
