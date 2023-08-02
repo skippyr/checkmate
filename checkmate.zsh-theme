@@ -10,11 +10,14 @@ __Checkmate()
 
 	Get_Directory()
 	{
-		typeset -a d=("${(s./.)PWD/${HOME}/~}")
-		[[ ${#d} -gt 1 ]] && for i in {1..$((${#d} - 1))}; do
-			[[ "${d[i]}" == .* ]] && d[i]=${d[i][1,2]} || d[i]=${d[i][1]}
-		done
-		echo ${(j./.)d}
+		typeset -a directory_splits=("${(s./.)PWD/${HOME}/~}")
+		[[ ${#directory_splits} -gt 1 ]] &&
+			for directory_split_index in {1..$((${#directory_splits} - 1))}; do
+				[[ "${directory_splits[directory_split_index]}" == .* ]] &&
+					directory_splits[directory_split_index]=${directory_splits[directory_split_index][1,2]} ||
+					directory_splits[directory_split_index]=${directory_splits[directory_split_index][1]}
+			done
+		echo ${(j./.)directory_splits}
 	}
 
 	Get_Changes()
@@ -24,8 +27,8 @@ __Checkmate()
 
 	Get_Branch()
 	{
-		typeset -r b=$(git branch --show-current 2>/dev/null)
-		[[ ${b} ]] && echo " %F{3}git:(%F{1}${b}$(Get_Changes)%F{3})"
+		typeset -r branch=$(git branch --show-current 2>/dev/null)
+		[[ ${branch} ]] && echo " %F{3}git:(%F{1}${branch}$(Get_Changes)%F{3})"
 	}
 
 	echo\
