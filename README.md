@@ -5,6 +5,7 @@ A theme for the ZSH shell that is decorated by chess pieces.
 
 It shows you:
 -   The exit code of failed commands.
+-   If you are the root user or a normal user using chess pieces.
 -   Your current directory abbreaviating parent directories.
 -   If inside a Git repository, the branch and if there are changes to commit.
 
