@@ -12,8 +12,8 @@ A theme for the ZSH shell that is decorated by chess pieces.
 -   Clone this repository.
 ```bash
 git\
-    clone --depth=1 https://github.com/skippyr/checkmate\
-    ~/.local/share/zsh/themes/checkmate
+  clone --depth=1 https://github.com/skippyr/checkmate\
+  ~/.local/share/zsh/themes/checkmate
 ```
 
 -   Add the following source rule to your `~/.zshrc` file. Ensure to not source
