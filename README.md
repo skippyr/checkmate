@@ -3,6 +3,11 @@
 A theme for the ZSH shell that is decorated by chess pieces.
 ![](preview.png)
 
+It shows you:
+-   The exit code of failed commands.
+-   Your current directory abbreaviating parent directories.
+-   If inside a Git repository, the branch and if there are changes to commit.
+
 ## Installation
 ### Dependencies
 -   git
