@@ -23,7 +23,7 @@ _checkmate() {
 
   get_branch() {
     typeset -r branch=$(git branch --show-current 2>/dev/null)
-    [[ ${branch} ]] && echo " %F{3}git:(%F{1}${branch}$(Get_Changes)%F{3})"
+    [[ ${branch} ]] && echo " %F{3}git:(%F{1}${branch}$(get_changes)%F{3})"
   }
 
   echo\
