@@ -19,7 +19,7 @@ The following dependencies must be installed to install this software properly:
 -   Clone this repository.
 ```bash
 git\
-    clone --depth=1 https://github.com/skippyr/checkmate
+    clone --depth=1 https://github.com/skippyr/checkmate\
     ~/.local/share/zsh/themes/checkmate
 ```
 
