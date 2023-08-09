@@ -32,7 +32,7 @@ __Checkmate()
     }
 
     echo                                                                       \
-        "%F{4} %f%(?..[%F{1}%?%f] )%(#.%F{1}.)"                             \
+        "%F{4} %f%(#.%F{1}%f.)%(?.. [%F{1}%?%f])"                           \
         "$(Get_Virtual_Environment)%F{4}$(Get_Directory)$(Get_Branch) %f↪ "
 }
 
