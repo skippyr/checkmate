@@ -1,14 +1,14 @@
 setopt promptsubst
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-__Checkmate()
+function __Checkmate()
 {
-    Get_Virtual_Environment()
+    function Get_Virtual_Environment()
     {
         [[ ${VIRTUAL_ENV} ]] && echo "%f<%F{1}${VIRTUAL_ENV##*/}%f> "
     }
 
-    Get_Directory()
+    function Get_Directory()
     {
         typeset -a directory_splits=("${(s./.)PWD/${HOME}/~}")
         [[ ${#directory_splits} -gt 1 ]] &&
@@ -20,12 +20,12 @@ __Checkmate()
         echo ${(j./.)directory_splits}
     }
 
-    Get_Changes()
+    function Get_Changes()
     {
         [[ $(git status --porcelain 2>/dev/null) ]] && echo "*"
     }
 
-    Get_Branch()
+    function Get_Branch()
     {
         typeset -r branch=$(git branch --show-current 2>/dev/null)
         [[ ${branch} ]] && echo " %F{3}git:(%F{1}${branch}$(Get_Changes)%F{3})"
