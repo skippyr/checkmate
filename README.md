@@ -47,6 +47,10 @@ source ~/.local/share/zsh/themes/checkmate/checkmate.zsh-theme
 
 - Reopen your shell session. At this point, the theme should be installed and running.
 
+## Support
+
+Report issues, questions and suggestions through its [issues page](https://github.com/skippyr/checkmate/issues).
+
 ## Copyright
 
 This software is under the MIT license. A copy of the license is bundled with the source code.
