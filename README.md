@@ -28,7 +28,7 @@ Using a terminal emulator, follow these steps:
 - Clone this repository using `git`.
 
 ```bash
-git clone --depth 1 https://github.com/skippyr/checkmate\
+git clone --depth 1 https://github.com/skippyr/checkmate \
 ~/.local/share/zsh/themes/checkmate
 ```
 
