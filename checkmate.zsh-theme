@@ -4,7 +4,7 @@ setopt promptsubst
 
 function _checkmate {
   function get_venv {
-    [[ ${VIRTUAL_ENV} ]] && "<%F{1}${VIRTUAL_ENV##*/}%f> "
+    [[ ${VIRTUAL_ENV} ]] && echo "<%F{1}${VIRTUAL_ENV##*/}%f> "
   }
 
   function get_cwd {
