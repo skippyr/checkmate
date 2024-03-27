@@ -1,30 +1,36 @@
-export VIRTUAL_ENV_DISABLE_PROMPT=1
+export VIRTUAL_ENV_DISABLE_PROMPT=1;
 
-setopt promptsubst
+setopt promptsubst;
 
-function _checkmate {
-  function get_venv {
-    [[ ${VIRTUAL_ENV} ]] && echo "<%F{1}${VIRTUAL_ENV##*/}%f> "
-  }
-
-  function get_cwd {
-    d=("${(s./.)PWD/${HOME}/~}")
-    [[ ${#d} -gt 1 ]] && for i in {1..$((${#d} - 1))}; do
-      [[ ${d[i]} == .* ]] && d[i]=${d[i][1,2]} || d[i]=${d[i][1]}
-    done
-    echo ${(j./.)d}
-  }
-
-  function stat_dirty {
-    [[ $(git status -s 2>/dev/null) ]] && echo "*"
-  }
-
-  function get_branch {
-    b=$(git branch --show-current 2>/dev/null)
-    [[ ${b} ]] && echo "%F{3}git:(%F{1}${b}$(stat_dirty)%F{3}) "
-  }
-  echo " %(#.%F{1}%f.)%(?.. [%F{1}%?%f]) $(get_venv)$(get_cwd)"\
-       "$(get_branch)%f↪ "
+function _checkmate_writeGitDirtyStatusModule
+{
+    [[ $(git status -s 2>/dev/null) ]] && echo "*";
 }
 
-PROMPT='$(_checkmate)'
+function _checkmate_writeGitModule
+{
+    branch=$(git branch --show-current 2>/dev/null);
+    [[ ${branch} ]] &&
+        echo "%F{yellow}git:(%F{red}${branch}$(_checkmate_writeGitDirtyStatusModule)%F{yellow}) ";
+}
+
+function _checkmate_writePathModule
+{
+    pathSplits=("${(s./.)PWD/${HOME}/~}");
+    [[ ${#pathSplits} -gt 1 ]] &&
+        for index in {1..$((${#pathSplits} - 1))};
+        do
+            [[ ${pathSplits[index]} == .* ]] &&
+                pathSplits[index]=${pathSplits[index][1,2]} ||
+                pathSplits[index]=${pathSplits[index][1]};
+        done
+    echo ${(j./.)pathSplits};
+}
+
+function _checkmate_writeVirtualEnvModule
+{
+    [[ ${VIRTUAL_ENV} ]] && echo "<%F{red}${VIRTUAL_ENV##*/}%f> ";
+}
+
+PROMPT=' %(#.%F{red}%f.)%(?.. [%F{red}%?%f]) $(_checkmate_writeVirtualEnvModule)\
+$(_checkmate_writePathModule) $(_checkmate_writeGitModule)%f↪ ';
