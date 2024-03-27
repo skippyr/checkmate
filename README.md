@@ -68,7 +68,7 @@ If you want to install and use this theme with the [`ohmyzsh`](https://github.co
 - Clone this repository using `git`:
 
 ```sh
-git clone --depth 1 https://github.com/skippyr/checkmate\
+git clone --depth 1 https://github.com/skippyr/checkmate \
                     ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/checkmate;
 ```
 
