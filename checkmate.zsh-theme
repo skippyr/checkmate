@@ -10,8 +10,7 @@ function _checkmate_writeGitDirtyStatusModule
 function _checkmate_writeGitModule
 {
     branch=$(git branch --show-current 2>/dev/null);
-    [[ ${branch} ]] &&
-        echo "%F{yellow}git:(%F{red}${branch}$(_checkmate_writeGitDirtyStatusModule)%F{yellow}) ";
+    [[ ${branch} ]] && echo "%F{yellow}git:(%F{red}${branch}$(_checkmate_writeGitDirtyStatusModule)%F{yellow}) ";
 }
 
 function _checkmate_writePathModule
@@ -32,5 +31,5 @@ function _checkmate_writeVirtualEnvModule
     [[ ${VIRTUAL_ENV} ]] && echo "<%F{red}${VIRTUAL_ENV##*/}%f> ";
 }
 
-PROMPT=' %(#.%F{red}%f.)%(?.. [%F{red}%?%f]) $(_checkmate_writeVirtualEnvModule)\
-$(_checkmate_writePathModule) $(_checkmate_writeGitModule)%f↪ ';
+PROMPT=' %(#.%F{red}%f.)%(?.. [%F{red}%?%f]) $(_checkmate_writeVirtualEnvModule)$(_checkmate_writePathModule) \
+$(_checkmate_writeGitModule)%f↪ ';
