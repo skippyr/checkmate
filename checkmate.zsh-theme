@@ -2,18 +2,18 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1;
 
 setopt promptsubst;
 
-function _checkmate_writeGitDirtyStatusModule
+function _Checkmate_WriteGitDirtyStatusModule()
 {
     [[ $(git status -s 2>/dev/null) ]] && echo "*";
 }
 
-function _checkmate_writeGitModule
+function _Checkmate_WriteGitModule()
 {
     branch=$(git branch --show-current 2>/dev/null);
-    [[ ${branch} ]] && echo "%F{yellow}git:(%F{red}${branch}$(_checkmate_writeGitDirtyStatusModule)%F{yellow}) ";
+    [[ ${branch} ]] && echo "%F{yellow}git:(%F{red}${branch}$(_Checkmate_WriteGitDirtyStatusModule)%F{yellow}) ";
 }
 
-function _checkmate_writePathModule
+function _Checkmate_WritePathModule()
 {
     pathSplits=("${(s./.)PWD/${HOME}/~}");
     [[ ${#pathSplits} -gt 1 ]] &&
@@ -26,10 +26,10 @@ function _checkmate_writePathModule
     echo ${(j./.)pathSplits};
 }
 
-function _checkmate_writeVirtualEnvModule
+function _Checkmate_WriteVirtualEnvModule()
 {
     [[ ${VIRTUAL_ENV} ]] && echo "<%F{red}${VIRTUAL_ENV##*/}%f> ";
 }
 
-PROMPT=' %(#.%F{red}%f.)%(?.. [%F{red}%?%f]) $(_checkmate_writeVirtualEnvModule)$(_checkmate_writePathModule) \
-$(_checkmate_writeGitModule)%f↪ ';
+PROMPT=' %(#.%F{red}%f.)%(?.. [%F{red}%?%f]) $(_Checkmate_WriteVirtualEnvModule)$(_Checkmate_WritePathModule) \
+$(_Checkmate_WriteGitModule)%f↪ ';
