@@ -1,35 +1,33 @@
-export VIRTUAL_ENV_DISABLE_PROMPT=1;
-
 setopt promptsubst;
 
-function _Checkmate_WriteGitDirtyStatusModule()
-{
-    [[ $(git status -s 2>/dev/null) ]] && echo "*";
+export VIRTUAL_ENV_DISABLE_PROMPT=1;
+
+_checkmate_write_git_dirty_status_module() {
+  [[ $(git status -s 2>/dev/null) ]] && echo "*";
 }
 
-function _Checkmate_WriteGitModule()
-{
-    branch=$(git branch --show-current 2>/dev/null);
-    [[ ${branch} ]] && echo "%F{yellow}git:(%F{red}${branch}$(_Checkmate_WriteGitDirtyStatusModule)%F{yellow}) ";
+_checkmate_write_git_module() {
+  branch=$(git branch --show-current 2>/dev/null);
+  [[ ${branch} ]] &&
+      echo "%F{yellow}git:(%F{red}${branch}$(_checkmate_write_git_dirty_status_module)%F{yellow}) ";
 }
 
-function _Checkmate_WritePathModule()
-{
-    pathSplits=("${(s./.)PWD/${HOME}/~}");
-    [[ ${#pathSplits} -gt 1 ]] &&
-        for index in {1..$((${#pathSplits} - 1))};
-        do
-            [[ ${pathSplits[index]} == .* ]] &&
-                pathSplits[index]=${pathSplits[index][1,2]} ||
-                pathSplits[index]=${pathSplits[index][1]};
-        done
-    echo ${(j./.)pathSplits};
+_checkmate_write_path_module() {
+  path_splits=("${(s./.)PWD/${HOME}/~}");
+  [[ ${#path_splits} -gt 1 ]] &&
+      for index in {1..$((${#path_splits} - 1))};
+      do
+        [[ ${path_splits[index]} == .* ]] &&
+            path_splits[index]=${path_splits[index][1,2]} ||
+            path_splits[index]=${path_splits[index][1]};
+      done
+  echo ${(j./.)path_splits};
 }
 
-function _Checkmate_WriteVirtualEnvModule()
-{
-    [[ ${VIRTUAL_ENV} ]] && echo "<%F{red}${VIRTUAL_ENV##*/}%f> ";
+_checkmate_write_virtual_env_module() {
+  [[ ${VIRTUAL_ENV} ]] && echo "<%F{red}${VIRTUAL_ENV##*/}%f> ";
 }
 
-PROMPT=' %(#.%F{red}%f.)%(?.. [%F{red}%?%f]) $(_Checkmate_WriteVirtualEnvModule)$(_Checkmate_WritePathModule) \
-$(_Checkmate_WriteGitModule)%f↪ ';
+PROMPT=' %(#.%F{red}%f.)%(?.. [%F{red}%?%f]) \
+$(_checkmate_write_virtual_env_module)$(_checkmate_write_path_module) \
+$(_checkmate_write_git_module)%f↪ ';
